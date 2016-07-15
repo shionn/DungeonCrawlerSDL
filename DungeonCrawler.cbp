@@ -37,20 +37,25 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="generator.c">
-			<Option compilerVar="CC" />
-		</Unit>
+		<Unit filename="door-1.png" />
+		<Unit filename="door-1l.png" />
+		<Unit filename="door-1r.png" />
+		<Unit filename="door-2.png" />
+		<Unit filename="door-2l.png" />
+		<Unit filename="door-2r.png" />
+		<Unit filename="generator/dungeon.pl" />
 		<Unit filename="ground.png" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="wall-0l.png" />
+		<Unit filename="wall-0r.png" />
+		<Unit filename="wall-1.png" />
+		<Unit filename="wall-2.png" />
+		<Unit filename="wall-3.png" />
+		<Unit filename="wall-3l.png" />
 		<Unit filename="wall-3r.png" />
-		<Unit filename="wall-f1.png" />
-		<Unit filename="wall-f2.png" />
-		<Unit filename="wall-f3.png" />
-		<Unit filename="wall-f3s.png" />
-		<Unit filename="wall-l0.png" />
-		<Unit filename="wall-r0.png" />
+		<Unit filename="walls.xcf" />
 		<Extensions>
 			<code_completion />
 			<debugger />

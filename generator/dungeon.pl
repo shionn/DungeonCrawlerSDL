@@ -171,12 +171,12 @@ print $writer "{";
 my $r; for ($r = 0; $r <= $dungeon->{'n_rows'}; $r++) {
   print $writer "{";
   my $c; for ($c = 0; $c <= $dungeon->{'n_cols'}; $c++) {
-    print $writer "$dungeon->{'cell'}->[$r][$c]";
+    printf $writer "0x%x", $dungeon->{'cell'}->[$r][$c];
 #    my $cell = $dungeon->{'cell'}->[$r][$c];
 #    if ($cell & $DOORSPACE) {print $writer "2";}
 #    elsif($cell & $OPENSPACE) {print $writer "0";}
 #    else {print $writer "1";}
-    if ($c <= $dungeon->{'n_cols'}) {
+    if ($c < $dungeon->{'n_cols'}) {
       print $writer ",";
     }
   }
@@ -191,8 +191,8 @@ close($writer);
 sub get_opts {
   my $opts = {
     'seed'              => time(),
-    'n_rows'            => 19,          # must be an odd number
-    'n_cols'            => 19,          # must be an odd number
+    'n_rows'            => 23,          # must be an odd number
+    'n_cols'            => 23,          # must be an odd number
     'dungeon_layout'    => 'None',
     'room_min'          => 3,           # minimum room size
     'room_max'          => 5,           # maximum room size
