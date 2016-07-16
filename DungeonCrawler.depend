@@ -1,10 +1,19 @@
 # depslib dependency file v1.0
-1468606876 source:/home/shionn/workspace/Projects-c/DungeonCrawler/main.c
+1468678210 source:/home/shionn/workspace/Projects-c/DungeonCrawler/main.c
 	<stdlib.h>
 	<SDL/SDL.h>
 	<SDL/SDL_image.h>
-	<assert.h>
+	"types.c"
+	"renderer.c"
 
 1468401601 source:/home/shionn/workspace/Projects-c/DungeonCrawler/generator.c
 	<stdlib.h>
+
+1468678029 /home/shionn/workspace/Projects-c/DungeonCrawler/types.c
+
+1468677417 source:/home/shionn/workspace/Projects-c/DungeonCrawler/types.c
+	<SDL/SDL.h>
+	<SDL/SDL_image.h>
+
+1468678322 /home/shionn/workspace/Projects-c/DungeonCrawler/renderer.c
 
