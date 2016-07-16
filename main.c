@@ -1,9 +1,7 @@
 #include <stdlib.h>
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
 
 #include "types.c"
-#include "renderer.c"
+#include "explorer.c"
 
 void init() {
   // initialize SDL video
@@ -17,6 +15,7 @@ void init() {
     exit(1);
   }
   loadRessources();
+  discoverMap();
 }
 
 void pollEvents() {
@@ -31,7 +30,10 @@ void pollEvents() {
           gameMode = quit;
         break;
     }
-    exploratePollEvent(event);
+    switch (gameMode) {
+      case explorate : exploratePollEvent(event); break;
+      case battle :    battlePoolEvent(event);    break;
+    }
   }
 }
 
@@ -42,7 +44,7 @@ int main() {
     pollEvents();
     display3dView();
     if (gameMode == battle) {
-
+      SDL_BlitSurface(monsterTexts[monster.id], NULL, screen, &monsterRects[monster.id]);
     }
     Uint8 *keystate = SDL_GetKeyState(NULL);
     if (keystate[SDLK_TAB]) {

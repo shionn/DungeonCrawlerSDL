@@ -1,4 +1,7 @@
 
+#include "types.c"
+#include "battle.c"
+
 void display3dView() {
   SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
   SDL_BlitSurface(groundTexts[0], NULL, screen, &groundRects[0]);
@@ -119,6 +122,13 @@ void displayMinimap() {
   SDL_FillRect(screen,&box,SDL_MapRGB(screen->format,0,0,192));
 }
 
+void discoverMap() {
+  for (int y=player.y-1;y<=player.y+1;y++)
+    for (int x=player.x-1;x<=player.x+1;x++) {
+      dungeon[y][x] = dungeon[y][x] | VISITED;
+    }
+}
+
 void exploratePollEvent(SDL_Event event) {
   switch(event.type) {
     case SDL_KEYDOWN :
@@ -128,10 +138,10 @@ void exploratePollEvent(SDL_Event event) {
         if (map(nx,ny) & OPENSPACE) {
           player.x = nx;
           player.y = ny;
-          for (int y=player.y-1;y<=player.y+1;y++)
-            for (int x=player.x-1;x<=player.x+1;x++) {
-              dungeon[y][x] = dungeon[y][x] | VISITED;
-            }
+          discoverMap();
+          if (!(rand()%10)) {
+            engageBattle();
+          }
         }
       }
       if (event.key.keysym.sym == SDLK_DOWN) {
@@ -140,10 +150,7 @@ void exploratePollEvent(SDL_Event event) {
         if (map(nx,ny) & OPENSPACE) {
           player.x = nx;
           player.y = ny;
-          for (int y=player.y-1;y<=player.y+1;y++)
-            for (int x=player.x-1;x<=player.x+1;x++) {
-              dungeon[y][x] = dungeon[y][x] | VISITED;
-            }
+          discoverMap();
         }
       }
       if (event.key.keysym.sym == SDLK_RIGHT) player.d = (player.d +1) % 4;

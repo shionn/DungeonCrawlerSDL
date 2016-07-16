@@ -1,19 +1,33 @@
 # depslib dependency file v1.0
-1468678210 source:/home/shionn/workspace/Projects-c/DungeonCrawler/main.c
+1468686551 source:/home/shionn/workspace/Projects-c/DungeonCrawler/main.c
 	<stdlib.h>
-	<SDL/SDL.h>
-	<SDL/SDL_image.h>
 	"types.c"
-	"renderer.c"
+	"explorer.c"
 
 1468401601 source:/home/shionn/workspace/Projects-c/DungeonCrawler/generator.c
 	<stdlib.h>
 
-1468678029 /home/shionn/workspace/Projects-c/DungeonCrawler/types.c
+1468687216 /home/shionn/workspace/Projects-c/DungeonCrawler/types.c
+	<SDL/SDL.h>
+	<SDL/SDL_image.h>
 
-1468677417 source:/home/shionn/workspace/Projects-c/DungeonCrawler/types.c
+1468686514 source:/home/shionn/workspace/Projects-c/DungeonCrawler/types.c
 	<SDL/SDL.h>
 	<SDL/SDL_image.h>
 
 1468678322 /home/shionn/workspace/Projects-c/DungeonCrawler/renderer.c
+
+1468682020 /home/shionn/workspace/Projects-c/DungeonCrawler/explorer.c
+	"types.c"
+	"battle.c"
+
+1468686542 source:/home/shionn/workspace/Projects-c/DungeonCrawler/battle.c
+	"types.c"
+
+1468687518 /home/shionn/workspace/Projects-c/DungeonCrawler/battle.c
+	"types.c"
+
+1468682020 source:/home/shionn/workspace/Projects-c/DungeonCrawler/explorer.c
+	"types.c"
+	"battle.c"
 

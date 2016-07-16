@@ -1,16 +1,9 @@
 
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
 
-typedef struct {
-  int x;
-  int y;
-  int d;
-} PlayerType;
-
-typedef enum {
-  explorate,
-  battle,
-  quit
-} GameModeType;
+#ifndef __DUNGEON_TYPE__
+#define __DUNGEON_TYPE__
 
 #define DUNGEON_W 23
 
@@ -46,11 +39,40 @@ typedef enum {
 //my $BLOCK_CORR  = $BLOCKED | $PERIMETER | $CORRIDOR;
 //my $BLOCK_DOOR  = $BLOCKED | $DOORSPACE;
 
+typedef struct {
+  int x;
+  int y;
+  int d;
+
+  int pv;
+  int f;
+  int xp;
+} PlayerType;
+
+typedef struct {
+  int pv;
+  int damage[2];
+  int xp;
+} MonsterType;
+
+typedef struct {
+  int id;
+  int pv;
+} MonsterEngageType;
+
+typedef enum {
+  explorate,
+  battle,
+  quit
+} GameModeType;
+
+
+
 SDL_Surface* screen;
 SDL_Surface* groundTexts[2];
 SDL_Rect     groundRects[2];
-SDL_Surface* ennemyTexts[8];
-SDL_Rect     ennemyRects[8];
+SDL_Surface* monsterTexts[8];
+SDL_Rect     monsterRects[8];
 SDL_Surface* wallTexts[13];
 SDL_Rect     wallRects[13];
 SDL_Rect     wallSrcRects[13];
@@ -58,8 +80,14 @@ SDL_Surface* doorTexts[17];
 SDL_Rect     doorRects[17];
 SDL_Rect     doorSrcRects[17];
 
-PlayerType   player = {17,19,1};
-GameModeType gameMode = explorate;
+PlayerType        player = {17,19,1, 20,3,0};
+GameModeType      gameMode = explorate;
+MonsterEngageType monster;
+
+MonsterType  monsters[9] = {
+  {5, {2,3}, 3}, //IMP
+};
+
 
 long dungeon[DUNGEON_W][DUNGEON_W] =
 {{0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x10,0x10,0x10,0x10,0x10,0x0,0x0,0x0,0x0,0x0,0x0},
@@ -215,30 +243,30 @@ void loadDoors() {
 }
 
 void loadEnnemies() {
-  ennemyTexts[0] = loadImage("imp.png");
-  ennemyRects[0].x = (224-ennemyTexts[0]->w)/2;
-  ennemyRects[0].y = 131-ennemyTexts[0]->h;
-  ennemyTexts[1] = loadImage("zombie.png");
-  ennemyRects[1].x = (224-ennemyTexts[1]->w)/2;
-  ennemyRects[1].y = 131-ennemyTexts[1]->h;
-  ennemyTexts[2] = loadImage("shadow_soul.png");
-  ennemyRects[2].x = (224-ennemyTexts[2]->w)/2;
-  ennemyRects[2].y = 131-ennemyTexts[2]->h;
-  ennemyTexts[3] = loadImage("skeleton.png");
-  ennemyRects[3].x = (224-ennemyTexts[3]->w)/2;
-  ennemyRects[3].y = 131-ennemyTexts[3]->h;
-  ennemyTexts[4] = loadImage("mimic.png");
-  ennemyRects[4].x = (224-ennemyTexts[4]->w)/2;
-  ennemyRects[4].y = 131-ennemyTexts[4]->h;
-  ennemyTexts[5] = loadImage("druid.png");
-  ennemyRects[5].x = (224-ennemyTexts[5]->w)/2;
-  ennemyRects[5].y = 131-ennemyTexts[5]->h;
-  ennemyTexts[6] = loadImage("shadow_tendrils.png");
-  ennemyRects[6].x = (224-ennemyTexts[6]->w)/2;
-  ennemyRects[6].y = 131-ennemyTexts[6]->h;
-  ennemyTexts[7] = loadImage("death_speaker.png");
-  ennemyRects[7].x = (224-ennemyTexts[7]->w)/2;
-  ennemyRects[7].y = 131-ennemyTexts[7]->h;
+  monsterTexts[0] = loadImage("imp.png");
+  monsterRects[0].x = (224-monsterTexts[0]->w)/2;
+  monsterRects[0].y = 131-monsterTexts[0]->h;
+  monsterTexts[1] = loadImage("zombie.png");
+  monsterRects[1].x = (224-monsterTexts[1]->w)/2;
+  monsterRects[1].y = 131-monsterTexts[1]->h;
+  monsterTexts[2] = loadImage("shadow_soul.png");
+  monsterRects[2].x = (224-monsterTexts[2]->w)/2;
+  monsterRects[2].y = 131-monsterTexts[2]->h;
+  monsterTexts[3] = loadImage("skeleton.png");
+  monsterRects[3].x = (224-monsterTexts[3]->w)/2;
+  monsterRects[3].y = 131-monsterTexts[3]->h;
+  monsterTexts[4] = loadImage("mimic.png");
+  monsterRects[4].x = (224-monsterTexts[4]->w)/2;
+  monsterRects[4].y = 131-monsterTexts[4]->h;
+  monsterTexts[5] = loadImage("druid.png");
+  monsterRects[5].x = (224-monsterTexts[5]->w)/2;
+  monsterRects[5].y = 131-monsterTexts[5]->h;
+  monsterTexts[6] = loadImage("shadow_tendrils.png");
+  monsterRects[6].x = (224-monsterTexts[6]->w)/2;
+  monsterRects[6].y = 131-monsterTexts[6]->h;
+  monsterTexts[7] = loadImage("death_speaker.png");
+  monsterRects[7].x = (224-monsterTexts[7]->w)/2;
+  monsterRects[7].y = 131-monsterTexts[7]->h;
 }
 
 void loadRessources() {
@@ -251,3 +279,5 @@ void loadRessources() {
   loadDoors();
   loadEnnemies();
 }
+
+#endif
