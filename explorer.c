@@ -152,13 +152,23 @@ void exploratePollEvent(SDL_Event event) {
       if (event.key.keysym.sym == SDLK_UP) {
         int nx = player.x + (player.d == 1 ?  1 : player.d == 3 ? -1 : 0);
         int ny = player.y + (player.d == 0 ? -1 : player.d == 2 ?  1 : 0);
-        int data = map(nx,ny);
+        long data = map(nx,ny);
         if (data & OPENSPACE) {
           player.x = nx;
           player.y = ny;
           discoverMap();
-          if (data&STAIR_UP) {
-            // TODO
+          if (data & STAIR_UP && player.lvl<DUNGEON_STAIRS-1) {
+            player.stair++;
+            player.x = stairs[player.stair][1][0];
+            player.y = stairs[player.stair][1][1];
+            player.d = stairs[player.stair][1][2];
+            discoverMap();
+          } else if (data & STAIR_DN && player.lvl>0) {
+            player.stair--;
+            player.x = stairs[player.stair][0][0];
+            player.y = stairs[player.stair][0][1];
+            player.d = stairs[player.stair][0][2];
+            discoverMap();
           }
           if (!(rand()%10)) {
             engageBattle();
@@ -168,10 +178,24 @@ void exploratePollEvent(SDL_Event event) {
       if (event.key.keysym.sym == SDLK_DOWN) {
         int nx = player.x - (player.d == 1 ?  1 : player.d == 3 ? -1 : 0);
         int ny = player.y - (player.d == 0 ? -1 : player.d == 2 ?  1 : 0);
-        if (map(nx,ny) & OPENSPACE) {
+        long data = map(nx,ny);
+        if (data & OPENSPACE) {
           player.x = nx;
           player.y = ny;
           discoverMap();
+          if (data & STAIR_UP && player.lvl<DUNGEON_STAIRS-1) {
+            player.stair++;
+            player.x = stairs[player.stair][1][0];
+            player.y = stairs[player.stair][1][1];
+            player.d = stairs[player.stair][1][2];
+            discoverMap();
+          } else if (data & STAIR_DN && player.stair>0) {
+            player.stair--;
+            player.x = stairs[player.stair][0][0];
+            player.y = stairs[player.stair][0][1];
+            player.d = stairs[player.stair][0][2];
+            discoverMap();
+          }
         }
       }
       if (event.key.keysym.sym == SDLK_RIGHT) player.d = (player.d +1) % 4;

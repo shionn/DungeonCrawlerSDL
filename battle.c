@@ -20,7 +20,7 @@ void playerLoose() {
 }
 
 void playerWin() {
-  int gain = monsters[monster.id].xp + monster.id - player.lvl;
+  int gain = monsters[monster.id].xp + monster.id - player.lvl +1;
   if (gain <= 0) gain = 1;
   printf("you win, gain %dxp\n", gain);
   player.xp += gain;
@@ -73,7 +73,10 @@ void battlePoolEvent(SDL_Event event) {
 }
 
 void engageBattle() {
-  int id = player.stair + rand()%3;
+  int id = rand()%6;
+  if (id<3)      id = player.stair;
+  else if (id<5) id = player.stair+1;
+  else           id = player.stair+2;
   gameMode       = battle;
   monster.pv     = monsters[id].pv;
   monster.id     = id;

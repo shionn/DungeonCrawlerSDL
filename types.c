@@ -71,8 +71,6 @@ typedef enum {
   quit
 } GameModeType;
 
-
-
 SDL_Surface* screen;
 SDL_Surface* groundTexts[2];
 SDL_Rect     groundRects[2];
@@ -93,15 +91,20 @@ MonsterEngageType monster;
 
 MonsterType  monsters[8] = {
   {4,  {2, 3},  2},  // IMP
-  {5,  {2, 5},  3},  // ZOMBIE
-  {7,  {4, 6},  4},  // shadow_soul
-  {12, {6, 8},  6},  // skeleton
-  {17, {5, 10}, 9},  // mimic
-  {21, {9, 11}, 12}, // druid
-  {28, {10,12}, 16},  // shadow_tendrils
-  {35, {10,15}, 20}   // death_speaker
+  {5,  {3, 6},  3},  // ZOMBIE
+  {7,  {4, 8},  4},  // shadow_soul
+  {12, {7, 10}, 6},  // skeleton
+  {17, {8, 15}, 9},  // mimic
+  {21, {12,18}, 12}, // druid
+  {28, {15,20}, 16},  // shadow_tendrils
+  {35, {20,25}, 20}   // death_speaker
 };
 
+int stairs[DUNGEON_STAIRS][2][3] = {
+{{0, 0, 0},{19,9,3}},
+{{3, 13,2},{6, 5,2}},
+{{15,5, 0},{19,3,2}}
+};
 
 long dungeon[DUNGEON_STAIRS][DUNGEON_W][DUNGEON_W] = {
 {{0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x10,0x10,0x10,0x10,0x10,0x0,0x0,0x0,0x0,0x0,0x0},
@@ -223,8 +226,8 @@ void loadWalls() {
   wallRects[6].x = 44+15;                   wallRects[6].y = 20;
   wallRects[7].x = 149;                     wallRects[7].y = 20;
 
-  wallRects[8].x = 0;                       wallRects[8].y = 26;
-  wallRects[9].x = 0;                       wallRects[9].y = 25;
+  wallRects[8].x  = 0;                      wallRects[8].y = 26;
+  wallRects[9].x  = 0;                      wallRects[9].y = 25;
   wallRects[10].x = 64;                     wallRects[10].y = 25;
   wallRects[11].x = 139;                    wallRects[11].y = 25;
   wallRects[12].x = 208;                    wallRects[12].y = 26;

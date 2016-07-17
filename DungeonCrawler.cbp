@@ -64,6 +64,9 @@
 		<Unit filename="shadow_soul.png" />
 		<Unit filename="shadow_tendrils.png" />
 		<Unit filename="skeleton.png" />
+		<Unit filename="stairup-1.png" />
+		<Unit filename="stairup-2.png" />
+		<Unit filename="stairup-3.png" />
 		<Unit filename="types.c">
 			<Option compilerVar="CC" />
 			<Option link="0" />
