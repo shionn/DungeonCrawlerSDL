@@ -46,6 +46,10 @@ void display3dView() {
     if ( data & (DOOR | LOCKED) ) {
       SDL_BlitSurface(doorTexts[13], NULL, screen, &doorRects[13]);
     }
+  } else if (data & STAIRS & STAIR_UP) {
+    SDL_BlitSurface(stairTexts[2], NULL, screen, &stairRects[2]);
+  } else if (data & STAIRS & STAIR_DN) {
+    SDL_BlitSurface(stairTexts[5], NULL, screen, &stairRects[5]);
   }
 
   // affichage en 2
@@ -68,6 +72,10 @@ void display3dView() {
     if ( data & (DOOR | LOCKED) ) {
       SDL_BlitSurface(doorTexts[7], NULL, screen, &doorRects[7]);
     }
+  } else if (data & STAIRS & STAIR_UP) {
+    SDL_BlitSurface(stairTexts[1], NULL, screen, &stairRects[1]);
+  } else if (data & STAIRS & STAIR_DN && player.stair != 0) {
+    SDL_BlitSurface(stairTexts[4], NULL, screen, &stairRects[4]);
   }
 
   // affichage en 1
@@ -90,6 +98,10 @@ void display3dView() {
     if ( data & (DOOR | LOCKED) ) {
       SDL_BlitSurface(doorTexts[2], NULL, screen, &doorRects[2]);
     }
+  } else if (data & STAIRS & STAIR_UP) {
+    SDL_BlitSurface(stairTexts[0], NULL, screen, &stairRects[0]);
+  } else if (data & STAIRS & STAIR_DN) {
+    SDL_BlitSurface(stairTexts[3], NULL, screen, &stairRects[3]);
   }
 
   // affichage en 0
@@ -103,29 +115,34 @@ void displayMinimap() {
   SDL_Rect box = {0, 0, 6, 6};
   for (int y=player.y-9;y<=player.y+9;y++)
     for (int x=player.x-9;x<=player.x+9;x++) {
-      if ( map(x,y) & VISITED ) {
+      int data = map(x,y);
+      if ( data & VISITED ) {
         box.x = 224 / 2 + (x-player.x)*6 - 3;
         box.y = 136 / 2 + (y-player.y)*6 - 3;
         box.w = box.h = 7;
         SDL_FillRect(screen,&box,SDL_MapRGB(screen->format,255,255,255));
         box.x++; box.y++; box.w = box.h = 5;
-        if (! ( map(x,y) & OPENSPACE ) ) {
+        if (! ( data & OPENSPACE ) ) {
           SDL_FillRect(screen,&box,SDL_MapRGB(screen->format,96,96,96));
         } else  {
           SDL_FillRect(screen,&box,SDL_MapRGB(screen->format,192,192,192));
+        }
+        box.x++; box.y++; box.w = box.h = 3;
+        if (map(x,y) & STAIRS) {
+          SDL_FillRect(screen,&box,SDL_MapRGB(screen->format,192,0,0));
         }
       }
     }
   box.x = 224 / 2 - 1;
   box.y = 136 / 2 - 1;
-  box.w = box.h = 3;
+  //box.w = box.h = 3;
   SDL_FillRect(screen,&box,SDL_MapRGB(screen->format,0,0,192));
 }
 
 void discoverMap() {
   for (int y=player.y-1;y<=player.y+1;y++)
     for (int x=player.x-1;x<=player.x+1;x++) {
-      dungeon[y][x] = dungeon[y][x] | VISITED;
+      dungeon[player.stair][y][x] = dungeon[player.stair][y][x] | VISITED;
     }
 }
 
@@ -135,10 +152,14 @@ void exploratePollEvent(SDL_Event event) {
       if (event.key.keysym.sym == SDLK_UP) {
         int nx = player.x + (player.d == 1 ?  1 : player.d == 3 ? -1 : 0);
         int ny = player.y + (player.d == 0 ? -1 : player.d == 2 ?  1 : 0);
-        if (map(nx,ny) & OPENSPACE) {
+        int data = map(nx,ny);
+        if (data & OPENSPACE) {
           player.x = nx;
           player.y = ny;
           discoverMap();
+          if (data&STAIR_UP) {
+            // TODO
+          }
           if (!(rand()%10)) {
             engageBattle();
           }

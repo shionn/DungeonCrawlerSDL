@@ -37,6 +37,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="battle.c">
+			<Option compilerVar="CC" />
+			<Option link="0" />
+		</Unit>
 		<Unit filename="death_speaker.png" />
 		<Unit filename="door-1.png" />
 		<Unit filename="door-1l.png" />
@@ -45,6 +49,10 @@
 		<Unit filename="door-2l.png" />
 		<Unit filename="door-2r.png" />
 		<Unit filename="druid.png" />
+		<Unit filename="explorer.c">
+			<Option compilerVar="CC" />
+			<Option link="0" />
+		</Unit>
 		<Unit filename="generator/dungeon.pl" />
 		<Unit filename="ground.png" />
 		<Unit filename="imp.png" />
@@ -56,6 +64,10 @@
 		<Unit filename="shadow_soul.png" />
 		<Unit filename="shadow_tendrils.png" />
 		<Unit filename="skeleton.png" />
+		<Unit filename="types.c">
+			<Option compilerVar="CC" />
+			<Option link="0" />
+		</Unit>
 		<Unit filename="wall-0l.png" />
 		<Unit filename="wall-0r.png" />
 		<Unit filename="wall-1.png" />

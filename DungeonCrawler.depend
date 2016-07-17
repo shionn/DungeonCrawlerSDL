@@ -7,27 +7,29 @@
 1468401601 source:/home/shionn/workspace/Projects-c/DungeonCrawler/generator.c
 	<stdlib.h>
 
-1468687216 /home/shionn/workspace/Projects-c/DungeonCrawler/types.c
+1468768211 /home/shionn/workspace/Projects-c/DungeonCrawler/types.c
 	<SDL/SDL.h>
 	<SDL/SDL_image.h>
 
-1468686514 source:/home/shionn/workspace/Projects-c/DungeonCrawler/types.c
+1468765476 source:/home/shionn/workspace/Projects-c/DungeonCrawler/types.c
 	<SDL/SDL.h>
 	<SDL/SDL_image.h>
 
 1468678322 /home/shionn/workspace/Projects-c/DungeonCrawler/renderer.c
 
-1468682020 /home/shionn/workspace/Projects-c/DungeonCrawler/explorer.c
+1468766291 /home/shionn/workspace/Projects-c/DungeonCrawler/explorer.c
 	"types.c"
 	"battle.c"
 
-1468686542 source:/home/shionn/workspace/Projects-c/DungeonCrawler/battle.c
+1468761992 source:/home/shionn/workspace/Projects-c/DungeonCrawler/battle.c
+	<stdlib.h>
 	"types.c"
 
-1468687518 /home/shionn/workspace/Projects-c/DungeonCrawler/battle.c
+1468768580 /home/shionn/workspace/Projects-c/DungeonCrawler/battle.c
+	<stdlib.h>
 	"types.c"
 
-1468682020 source:/home/shionn/workspace/Projects-c/DungeonCrawler/explorer.c
+1468766291 source:/home/shionn/workspace/Projects-c/DungeonCrawler/explorer.c
 	"types.c"
 	"battle.c"
 
