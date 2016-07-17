@@ -96,14 +96,14 @@ MonsterType  monsters[8] = {
   {12, {7, 10}, 6},  // skeleton
   {17, {8, 15}, 9},  // mimic
   {21, {12,18}, 12}, // druid
-  {28, {15,20}, 16},  // shadow_tendrils
-  {35, {20,25}, 20}   // death_speaker
+  {28, {15,20}, 16}, // shadow_tendrils
+  {35, {20,25}, 20}  // death_speaker
 };
 
 int stairs[DUNGEON_STAIRS][2][3] = {
-{{0, 0, 0},{19,9,3}},
-{{3, 13,2},{6, 5,2}},
-{{15,5, 0},{19,3,2}}
+{{0, 0, 0},{18,9,3}},
+{{3, 14,2},{6, 6,2}},
+{{15,4, 0},{19,4,2}}
 };
 
 long dungeon[DUNGEON_STAIRS][DUNGEON_W][DUNGEON_W] = {
